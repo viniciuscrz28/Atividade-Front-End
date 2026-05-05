@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Copa do Mundo 2026 - Questão 03</title>
+    <!-- O CSS da Questão 2 pode ser vinculado aqui -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav>
+        <a href="#organizacao">Organização</a> | 
+        <a href="#formato">Novo Formato</a> | 
+        <a href="#expectativas">Expectativas</a>
+    </nav>
+
+    <section id="organizacao">
+        <h2>🌍 Organização e Sedes</h2>
+        <p>A Copa do Mundo FIFA de 2026 será a primeira edição realizada em três países: Estados Unidos, Canadá e México.</p>
+    </section>
+
+    <section id="formato">
+        <h2>⚽ Novo Formato</h2>
+        <p>O torneio contará com 48 seleções, em vez das tradicionais 32.</p>
+    </section>
+
+    <section id="expectativas">
+        <h2>🏆 Expectativas e Impacto</h2>
+        <p>A edição de 2026 promete ser uma das mais assistidas da história.</p>
+    </section>
+
+    <!-- COMANDO QUESTÃO 03: Botão para disparar a função -->
+    <div style="text-align: center; margin-top: 30px;">
+        <button onclick="mostrarImagem()">Mostrar Tabela de Jogos</button>
+    </div>
+
+    <!-- Div vazia onde a imagem será injetada pelo JS -->
+    <div id="resultado-tabela" style="text-align: center; margin-top: 20px;"></div>
+
+    <script>
+        // Função disparada pelo evento onclick
+        function mostrarImagem() {
+            // Seleciona o container final da página
+            const container = document.getElementById('resultado-tabela');
+            
+            // Cria o elemento de imagem dinamicamente
+            const novaImagem = document.createElement('img');
+            
+            // Define o caminho da imagem (conforme o descritivo de apoio)
+            // Certifique-se de que o nome do arquivo na sua pasta seja igual a este:
+            novaImagem.src = 'img/Tabela_Jogos.png'; 
+            novaImagem.alt = 'Imagem da Tabela de Jogos';
+            novaImagem.style.maxWidth = '100%';
+            novaImagem.style.border = '2px solid #ccc';
+            novaImagem.style.borderRadius = '10px';
+
+            // Limpa o conteúdo antes de inserir (evita duplicar a imagem se clicar várias vezes)
+            container.innerHTML = '';
+            
+            // Insere a imagem ao final da página (dentro da div de resultado)
+            container.appendChild(novaImagem);
+        }
+    </script>
+
+</body>
+</html>

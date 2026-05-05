@@ -1,0 +1,56 @@
+/* Cor de fundo suave aplicada ao background */
+body {
+    background-color: #f0f4f8;
+    font-family: Arial, sans-serif;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Estilização da navegação */
+nav {
+    text-align: center;
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+/* Estilização de classe para as secções */
+.secao-conteudo {
+    background-color: #ffffff; /* Cor suave para a seção */
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 15px; /* Uso de border-radius */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+/* Alteração de tamanho e peso para destacar títulos */
+h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #1a5276;
+    border-bottom: 2px solid #eaf2f8;
+    padding-bottom: 10px;
+}
+
+/* Alinhamento e espaçamentos mínimos */
+p {
+    font-size: 16px;
+    text-align: justify;
+}
+
+button {
+    background-color: #1a5276;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #154360;
+}
