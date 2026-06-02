@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tutorial - Neon Dash</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Inter, Arial, sans-serif;
+      background: #0b1020;
+      color: #fff;
+      display: flex;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    aside {
+      width: 280px;
+      background: #0f172a;
+      border-right: 1px solid rgba(255,255,255,.08);
+      padding: 30px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+    }
+
+    aside h1 {
+      font-size: 28px;
+      margin-bottom: 25px;
+      color: cyan;
+      text-shadow: 0 0 12px cyan;
+    }
+
+    aside ul {
+      list-style: none;
+    }
+
+    aside li {
+      margin-bottom: 16px;
+    }
+
+    aside a {
+      color: rgba(255,255,255,.8);
+      text-decoration: none;
+      transition: .2s;
+      display: block;
+    }
+
+    aside a:hover {
+      color: cyan;
+      transform: translateX(5px);
+    }
+
+    main {
+      flex: 1;
+      padding: 60px;
+      max-width: 1200px;
+    }
+
+    .hero {
+      margin-bottom: 80px;
+    }
+
+    .hero h2 {
+      font-size: 64px;
+      margin-bottom: 20px;
+      line-height: 1;
+    }
+
+    .hero p {
+      color: rgba(255,255,255,.7);
+      font-size: 20px;
+      max-width: 800px;
+      line-height: 1.7;
+    }
+
+    .section {
+      margin-bottom: 120px;
+      scroll-margin-top: 40px;
+    }
+
+    .section h3 {
+      font-size: 40px;
+      margin-bottom: 20px;
+      color: cyan;
+    }
+
+    .section p {
+      line-height: 1.8;
+      color: rgba(255,255,255,.78);
+      margin-bottom: 25px;
+      font-size: 18px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+      margin-top: 30px;
+    }
+
+    .card {
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 20px;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+
+    .card-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      background: rgba(255,255,255,.02);
+      font-weight: bold;
+      color: cyan;
+    }
+
+    pre {
+      overflow-x: auto;
+      padding: 25px;
+      font-size: 15px;
+      line-height: 1.7;
+      color: #e2e8f0;
+    }
+
+    code {
+      font-family: Consolas, monospace;
+    }
+
+    .preview {
+      padding: 25px;
+      min-height: 250px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .canvas-demo {
+      width: 100%;
+      height: 250px;
+      border-radius: 14px;
+      background:
+        linear-gradient(to bottom, #111827, #050816);
+      border: 1px solid rgba(255,255,255,.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cube {
+      width: 42px;
+      height: 42px;
+      background: white;
+      border: 3px solid cyan;
+      position: absolute;
+      left: 70px;
+      bottom: 50px;
+      box-shadow: 0 0 30px cyan;
+      animation: spin 2s linear infinite;
+    }
+
+    .spike {
+      width: 0;
+      height: 0;
+      border-left: 25px solid transparent;
+      border-right: 25px solid transparent;
+      border-bottom: 70px solid #ff006e;
+      position: absolute;
+      right: 90px;
+      bottom: 50px;
+      filter: drop-shadow(0 0 20px #ff006e);
+    }
+
+    .ground {
+      position: absolute;
+      width: 100%;
+      height: 6px;
+      background: cyan;
+      bottom: 45px;
+      box-shadow: 0 0 20px cyan;
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .tip {
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 16px;
+      background: rgba(0,255,255,.08);
+      border: 1px solid rgba(0,255,255,.2);
+      color: #bffcff;
+    }
+
+    .footer {
+      margin-top: 100px;
+      padding-top: 50px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      color: rgba(255,255,255,.5);
+      text-align: center;
+    }
+
+    @media(max-width: 1000px) {
+      body {
+        flex-direction: column;
+      }
+
+      aside {
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h2 {
+        font-size: 46px;
+      }
+
+      main {
+        padding: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<aside>
+  <h1>NEON DASH</h1>
+
+  <ul>
+    <li><a href="#intro">Introdução</a></li>
+    <li><a href="#canvas">Canvas</a></li>
+    <li><a href="#player">Player</a></li>
+    <li><a href="#physics">Física</a></li>
+    <li><a href="#obstacles">Obstáculos</a></li>
+    <li><a href="#particles">Partículas</a></li>
+    <li><a href="#gameloop">Game Loop</a></li>
+    <li><a href="#polish">Polimento Final</a></li>
+  </ul>
+</aside>
+
+<main>
+
+  <section class="hero" id="intro">
+    <h2>Crie um Geometry Dash Minimalista em JavaScript</h2>
+
+    <p>
+      Neste tutorial você vai aprender como criar um jogo procedural inspirado em Geometry Dash usando apenas HTML, CSS e JavaScript puro.
+      Sem frameworks, sem bibliotecas e sem dependências.
+      Só o velho e poderoso navegador fazendo magia.
+    </p>
+  </section>
+
+  <section class="section" id="canvas">
+    <h3>1. Criando o Canvas</h3>
+
+    <p>
+      Todo jogo web moderno começa com um canvas. Ele funciona como uma folha em branco onde desenhamos tudo:
+      jogador, obstáculos, partículas e efeitos.
+    </p>
+
+    <div class="grid">
+      <div class="card">
+        <div class="card-header">Código</div>
+
+<pre><code>&lt;canvas id="game"&gt;&lt;/canvas&gt;
+
+const canvas = document.getElementById('game');
+const ctx = canvas.getContext('2d');
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;</code></pre>
+      </div>
+
+      <div class="card">
+        <div class="card-header">Resultado</div>
+
+        <div class="preview">
+          <div class="canvas-demo"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tip">
+      O segredo aqui é simples: o canvas é literalmente o monitor do seu jogo.
+      Tudo será desenhado manualmente nele.
+    </div>
+  </section>
+
+  <section class="section" id="player">
+    <h3>2. Criando o Player</h3>
+
+    <p>
+      O player é apenas um objeto JavaScript contendo posição, velocidade e tamanho.
+      O truque está em atualizar esses valores constantemente.
+    </p>
+
+    <div class="grid">
+      <div class="card">
+        <div class="card-header">Código</div>
+
+<pre><code>const player = {
+  x: 180,
+  y: 300,
+  size: 42,
+  velY: 0,
+  grounded: false,
+  rotation: 0
+};</code></pre>
+      </div>
+
+      <div class="card">
+        <div class="card-header">Preview</div>
+
+        <div class="preview">
+          <div class="canvas-demo">
+            <div class="ground"></div>
+            <div class="cube"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="physics">
+    <h3>3. Física e Gravidade</h3>
+
+    <p>
+      Gravidade em jogos 2D é extremamente simples.
+      Você só adiciona força vertical continuamente.
+      Isso cria o efeito de queda.
+    </p>
+
+    <div class="grid">
+      <div class="card">
+        <div class="card-header">Código</div>
+
+<pre><code>player.velY += gravity;
+player.y += player.velY;
+
+if(player.y &gt;= groundY) {
+  player.y = groundY;
+  player.velY = 0;
+  player.grounded = true;
+}</code></pre>
+      </div>
+
+      <div class="card">
+        <div class="card-header">Entendendo</div>
+
+        <div class="preview" style="align-items:flex-start; flex-direction:column;">
+          <p>
+            • gravity = força constante<br>
+            • velY = velocidade vertical<br>
+            • y = posição do player
+          </p>
+
+          <div class="tip">
+            Jogos clássicos usam exatamente esse conceito desde os anos 80.
+            O simples ainda domina.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="obstacles">
+    <h3>4. Obstáculos Procedurais</h3>
+
+    <p>
+      O procedural deixa o jogo infinito.
+      Em vez de criar fases manualmente, usamos números aleatórios.
+    </p>
+
+    <div class="grid">
+      <div class="card">
+        <div class="card-header">Código</div>
+
+<pre><code>function spawnObstacle() {
+  const h = Math.random() * 80 + 40;
+
+  obstacles.push({
+    x: canvas.width,
+    y: groundY - h,
+    w: 40,
+    h
+  });
+}</code></pre>
+      </div>
+
+      <div class="card">
+        <div class="card-header">Preview</div>
+
+        <div class="preview">
+          <div class="canvas-demo">
+            <div class="ground"></div>
+            <div class="cube"></div>
+            <div class="spike"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="particles">
+    <h3>5. Partículas Neon</h3>
+
+    <p>
+      Partículas são o que fazem o jogo parecer premium.
+      Mesmo usando apenas quadrados pequenos, o cérebro interpreta como energia e movimento.
+    </p>
+
+    <div class="grid">
+      <div class="card">
+        <div class="card-header">Código</div>
+
+<pre><code>particles.push({
+  x: player.x,
+  y: player.y,
+  vx: Math.random() * 4 - 2,
+  vy: Math.random() * -4,
+  life: 30
+});</code></pre>
+      </div>
+
+      <div class="card">
+        <div class="card-header">Resultado</div>
+
+        <div class="preview" style="flex-direction:column;">
+          <h2 style="color:cyan; text-shadow:0 0 20px cyan;">
+            ✦ ✦ ✦
+          </h2>
+
+          <p style="margin-top:20px; opacity:.7;">
+            Glow + partículas = sensação moderna.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="gameloop">
+    <h3>6. O Game Loop</h3>
+
+    <p>
+      O coração do jogo é o loop principal.
+      Ele atualiza a tela dezenas de vezes por segundo.
+    </p>
+
+    <div class="grid">
+      <div class="card">
+        <div class="card-header">Código</div>
+
+<pre><code>function update() {
+  requestAnimationFrame(update);
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  drawPlayer();
+  drawObstacles();
+  updatePhysics();
+}
+
+update();</code></pre>
+      </div>
+
+      <div class="card">
+        <div class="card-header">Explicação</div>
+
+        <div class="preview" style="align-items:flex-start; flex-direction:column;">
+          <p>
+            requestAnimationFrame() sincroniza o jogo com os frames do navegador.
+          </p>
+
+          <div class="tip">
+            É isso que faz o jogo parecer fluido.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="polish">
+    <h3>7. Polimento Final</h3>
+
+    <p>
+      A diferença entre um projeto amador e algo que parece profissional normalmente está no polimento.
+      Glow, shake de câmera, menus e animações fazem toda diferença.
+    </p>
+
+    <div class="grid">
+      <div class="card">
+        <div class="card-header">Checklist</div>
+
+<pre><code>✓ Glow neon
+✓ Partículas
+✓ Câmera shake
+✓ Dificuldade progressiva
+✓ Interface moderna
+✓ Obstáculos procedural
+✓ Feedback visual
+✓ Responsividade</code></pre>
+      </div>
+
+      <div class="card">
+        <div class="card-header">Resultado Final</div>
+
+        <div class="preview" style="flex-direction:column;">
+          <h1 style="font-size:48px; color:white;
+            text-shadow:0 0 20px cyan, 0 0 40px cyan;">
+            NEON DASH
+          </h1>
+
+          <p style="margin-top:20px; opacity:.7;">
+            Minimalista • Procedural • Viciante
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">
+    Tutorial criado para acompanhar o projeto Neon Dash.
+    HTML + CSS + JavaScript puro.
+  </div>
+
+</main>
+
+</body>
+</html>
