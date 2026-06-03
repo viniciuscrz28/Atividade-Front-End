@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Validador de Segurança Infinity</title>
+
+<style>
+
+    body{
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #f2f2f2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .card{
+        background-color: white;
+        width: 450px;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+    }
+
+    h2{
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    input{
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        margin-bottom: 15px;
+    }
+
+    button{
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover{
+        background-color: #0056b3;
+    }
+
+    #resultado{
+        margin-top: 20px;
+        padding: 15px;
+        border-radius: 5px;
+        background-color: #f8f8f8;
+        line-height: 28px;
+    }
+
+    .valido{
+        color: green;
+    }
+
+    .invalido{
+        color: red;
+    }
+
+</style>
+
+</head>
+<body>
+
+<div class="card">
+
+    <h2>Validador de Segurança Infinity</h2>
+
+    <input
+        type="text"
+        id="cartao"
+        maxlength="19"
+        placeholder="Digite o número do cartão">
+
+    <button id="analisar">
+        Analisar Cartão
+    </button>
+
+    <div id="resultado"></div>
+
+</div>
+
+<script src="js/Ques7.js"></script>
+
+</body>
+</html>

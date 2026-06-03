@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinity Bank - Lista VIP</title>
+
+    <style>
+
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card{
+            background-color: white;
+            width: 450px;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0,0,0,0.15);
+        }
+
+        h2{
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .area-input{
+            display: flex;
+            gap: 10px;
+        }
+
+        input{
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        button{
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+        }
+
+        .btn-add{
+            background-color: #007bff;
+        }
+
+        .btn-concluir{
+            background-color: green;
+        }
+
+        .btn-editar{
+            background-color: orange;
+        }
+
+        .btn-excluir{
+            background-color: red;
+        }
+
+        ul{
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        li{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .acoes{
+            display: flex;
+            gap: 5px;
+        }
+
+        .riscado{
+            text-decoration: line-through;
+            color: gray;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="card">
+
+        <h2>Infinity Bank - Lista VIP</h2>
+
+        <div class="area-input">
+
+            <input type="text" id="nome" placeholder="Digite o nome do convidado">
+
+            <button class="btn-add" id="adicionar">
+                Adicionar
+            </button>
+
+        </div>
+
+        <ul id="lista"></ul>
+
+    </div>
+
+    <script src="js/Ques5.js"></script>
+
+</body>
+</html>
